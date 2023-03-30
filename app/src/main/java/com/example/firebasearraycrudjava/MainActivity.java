@@ -88,15 +88,15 @@ public class MainActivity extends AppCompatActivity implements StudentsAdapter.I
     }
 
     void updateData(int index, Student student) {
-        Call<String> call = RestApi.api.updateStudent(index, student);
-        call.enqueue(new Callback<String>() {
+        Call<Student> call = RestApi.api.updateStudent(index, student);
+        call.enqueue(new Callback<Student>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Student> call, Response<Student> response) {
                 readData();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Student> call, Throwable t) {
                 readData();
             }
         });

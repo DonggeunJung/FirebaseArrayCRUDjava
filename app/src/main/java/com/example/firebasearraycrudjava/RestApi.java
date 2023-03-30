@@ -24,7 +24,7 @@ public interface RestApi {
     Call<List<MainActivity.Student>> getStudents();
 
     @PATCH(STUDENTS + "/{id}" + EXT)
-    Call<String> updateStudent(@Path("id") int id, @Body MainActivity.Student student);
+    Call<MainActivity.Student> updateStudent(@Path("id") int id, @Body MainActivity.Student student);
 
     @DELETE(STUDENTS + "/{id}" + EXT)
     Call<String> delStudent(@Path("id") int id);
