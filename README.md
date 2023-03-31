@@ -1,5 +1,5 @@
 # FirebaseArrayCRUDjava
- [Android & Java] Firebase Array CRUD sample project
+ [Android & Java] Firebase - Realtime Database - Array CRUD sample project
 
 
 [Image1 : List of Firebase DB]
@@ -18,7 +18,7 @@ Original URL : https://reportcard-76355-default-rtdb.firebaseio.com/students.jso
 <br>
 <br>
 < Used Android API ><br>
-Firebase<br>
+Firebase - Realtime Database<br>
 Retrofit2<br>
 RecyclerView<br>
 Java<br>
