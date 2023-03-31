@@ -1,5 +1,5 @@
 # FirebaseArrayCRUDjava
- [Android & Java] Firebase - Realtime Database - Array CRUD sample project
+ [Android & Java] Firebase - Realtime Database - Array CRUD by RestAPI sample project
 
 
 [Image1 : List of Firebase DB]
