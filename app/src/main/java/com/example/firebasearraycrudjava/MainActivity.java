@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements BaseAdapter.ItemE
     EditText etName;
     EditText etMath;
     EditText etScience;
-    StudentsAdapter adapter;
+    BaseAdapter adapter;
     int selIndex = -1;
 
     @Override
@@ -30,9 +30,13 @@ public class MainActivity extends AppCompatActivity implements BaseAdapter.ItemE
         etScience = findViewById(R.id.etScience);
 
         rvStudents = findViewById(R.id.rvStudents);
-        adapter = StudentsAdapter.makeInstance(rvStudents, this);
+        adapter = BaseAdapter.makeInstance(rvStudents, R.layout.student_item, this);
 
         readData();
+    }
+
+    Student getData(int index) {
+        return (Student)adapter.getData(index);
     }
 
     void updateRecyclerView(List<Student> students) {
@@ -128,10 +132,26 @@ public class MainActivity extends AppCompatActivity implements BaseAdapter.ItemE
     @Override
     public void onClickItem(int index) {
         selIndex = index;
-        Student student = adapter.getData(index);
+        Student student = getData(index);
         etName.setText(student.name);
         etMath.setText(student.math + "");
         etScience.setText(student.science + "");
+    }
+
+    @Override
+    public void onBindViewHolder(View v, int index, Object data) {
+        Student student = (Student)data;
+        TextView tvStudent = v.findViewById(R.id.tvStudent);
+        View dividerBottom = v.findViewById(R.id.dividerBottom);
+
+        if(student == null) {
+            tvStudent.setVisibility(View.GONE);
+            dividerBottom.setVisibility(View.GONE);
+        } else {
+            tvStudent.setVisibility(View.VISIBLE);
+            tvStudent.setText(student.getInfo());
+            dividerBottom.setVisibility(View.VISIBLE);
+        }
     }
 
 }
