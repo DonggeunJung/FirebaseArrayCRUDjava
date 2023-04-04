@@ -12,7 +12,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements StudentsAdapter.ItemEvent {
+public class MainActivity extends AppCompatActivity implements BaseAdapter.ItemEvent {
     RecyclerView rvStudents;
     EditText etName;
     EditText etMath;
@@ -34,14 +34,15 @@ public class MainActivity extends AppCompatActivity implements StudentsAdapter.I
         LinearLayoutManager lm = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
         rvStudents.setLayoutManager(lm);
-        adapter = new StudentsAdapter(this);
+        adapter = new StudentsAdapter();
+        adapter.setListener(this);
         rvStudents.setAdapter(adapter);
 
         readData();
     }
 
     void updateRecyclerView(List<Student> students) {
-        adapter.setStudents(students);
+        adapter.setList(students);
         adapter.notifyDataSetChanged();
     }
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements StudentsAdapter.I
 
     public void onBtnAdd(View v) {
         Student student = getInput();
-        updateData(adapter.students.size(), student);
+        updateData(adapter.list.size(), student);
     }
 
     public void onBtnUpdate(View v) {
@@ -131,8 +132,9 @@ public class MainActivity extends AppCompatActivity implements StudentsAdapter.I
     }
 
     @Override
-    public void onClickItem(int index, Student student) {
+    public void onClickItem(int index) {
         selIndex = index;
+        Student student = adapter.list.get(index);
         etName.setText(student.name);
         etMath.setText(student.math + "");
         etScience.setText(student.science + "");
