@@ -1,7 +1,6 @@
 package com.example.firebasearraycrudjava;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
@@ -31,11 +30,7 @@ public class MainActivity extends AppCompatActivity implements BaseAdapter.ItemE
         etScience = findViewById(R.id.etScience);
 
         rvStudents = findViewById(R.id.rvStudents);
-        LinearLayoutManager lm = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
-        rvStudents.setLayoutManager(lm);
-        adapter = new StudentsAdapter(R.layout.student_item, this);
-        rvStudents.setAdapter(adapter);
+        adapter = StudentsAdapter.makeInstance(rvStudents, this);
 
         readData();
     }
