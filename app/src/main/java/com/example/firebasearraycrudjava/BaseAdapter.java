@@ -21,6 +21,10 @@ public class BaseAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+    public Object getData(int index) {
+        return list.get(index);
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

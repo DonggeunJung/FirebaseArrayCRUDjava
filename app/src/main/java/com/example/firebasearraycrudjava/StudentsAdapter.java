@@ -12,7 +12,7 @@ public class StudentsAdapter extends BaseAdapter {
     }
 
     public MainActivity.Student getData(int index) {
-        return (MainActivity.Student)list.get(index);
+        return (MainActivity.Student)super.getData(index);
     }
 
     @Override
