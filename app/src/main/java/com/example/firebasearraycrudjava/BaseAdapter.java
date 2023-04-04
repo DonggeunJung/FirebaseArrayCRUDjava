@@ -1,16 +1,32 @@
 package com.example.firebasearraycrudjava;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
 
 public class BaseAdapter extends RecyclerView.Adapter {
+    protected List<?> list = null;
+    protected int layoutItem = -1;
+
+    public BaseAdapter(int layoutItem, ItemEvent itemEvent) {
+        this.layoutItem = layoutItem;
+        this.itemEvent = itemEvent;
+    }
+
+    public void setList(List<?> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View itemView = inflater.inflate(layoutItem, parent, false);
+        return new BaseVH(itemView);
     }
 
     @Override
@@ -18,7 +34,14 @@ public class BaseAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list == null ? 0 : list.size();
+    }
+
+    protected View setClickable(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if(list == null || list.size() <= position) return null;
+        View itemView = ((BaseVH)holder).itemView;
+        setClickable(itemView, position);
+        return itemView;
     }
 
     protected void setClickable(View v, int position) {
@@ -48,9 +71,5 @@ public class BaseAdapter extends RecyclerView.Adapter {
     }
 
     ItemEvent itemEvent = null;
-
-    public void setListener(ItemEvent itemEvent) {
-        this.itemEvent = itemEvent;
-    }
 
 }

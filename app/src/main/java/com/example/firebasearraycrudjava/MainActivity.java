@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements BaseAdapter.ItemE
         LinearLayoutManager lm = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
         rvStudents.setLayoutManager(lm);
-        adapter = new StudentsAdapter();
-        adapter.setListener(this);
+        adapter = new StudentsAdapter(R.layout.student_item, this);
         rvStudents.setAdapter(adapter);
 
         readData();
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements BaseAdapter.ItemE
     @Override
     public void onClickItem(int index) {
         selIndex = index;
-        Student student = adapter.list.get(index);
+        Student student = adapter.getData(index);
         etName.setText(student.name);
         etMath.setText(student.math + "");
         etScience.setText(student.science + "");
