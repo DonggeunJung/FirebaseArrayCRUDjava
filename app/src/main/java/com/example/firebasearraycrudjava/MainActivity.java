@@ -39,6 +39,31 @@ public class MainActivity extends AppCompatActivity implements BaseAdapter.ItemE
         return (Student)adapter.getData(index);
     }
 
+    @Override
+    public void onClickItem(int index) {
+        selIndex = index;
+        Student student = getData(index);
+        etName.setText(student.name);
+        etMath.setText(student.math + "");
+        etScience.setText(student.science + "");
+    }
+
+    @Override
+    public void onBindViewHolder(View v, int index, Object data) {
+        Student student = (Student)data;
+        TextView tvStudent = v.findViewById(R.id.tvStudent);
+        View dividerBottom = v.findViewById(R.id.dividerBottom);
+
+        if(student == null) {
+            tvStudent.setVisibility(View.GONE);
+            dividerBottom.setVisibility(View.GONE);
+        } else {
+            tvStudent.setVisibility(View.VISIBLE);
+            tvStudent.setText(student.getInfo());
+            dividerBottom.setVisibility(View.VISIBLE);
+        }
+    }
+
     void updateRecyclerView(List<Student> students) {
         adapter.setList(students);
         adapter.notifyDataSetChanged();
@@ -127,31 +152,6 @@ public class MainActivity extends AppCompatActivity implements BaseAdapter.ItemE
         int math = Integer.parseInt(etMath.getText().toString());
         int science = Integer.parseInt(etScience.getText().toString());
         return new Student(name, math, science);
-    }
-
-    @Override
-    public void onClickItem(int index) {
-        selIndex = index;
-        Student student = getData(index);
-        etName.setText(student.name);
-        etMath.setText(student.math + "");
-        etScience.setText(student.science + "");
-    }
-
-    @Override
-    public void onBindViewHolder(View v, int index, Object data) {
-        Student student = (Student)data;
-        TextView tvStudent = v.findViewById(R.id.tvStudent);
-        View dividerBottom = v.findViewById(R.id.dividerBottom);
-
-        if(student == null) {
-            tvStudent.setVisibility(View.GONE);
-            dividerBottom.setVisibility(View.GONE);
-        } else {
-            tvStudent.setVisibility(View.VISIBLE);
-            tvStudent.setText(student.getInfo());
-            dividerBottom.setVisibility(View.VISIBLE);
-        }
     }
 
 }
